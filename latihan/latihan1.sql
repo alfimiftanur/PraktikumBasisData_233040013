@@ -1,21 +1,21 @@
-CREATE TABLE mahasiswa(
-id int primary key, 
-nim int NOT NULL,
-nama varchar (100) NOT NULL,
-jurusan varchar(100) NOT NULL,
-tanggalLhair date NOT NULL
-)
-
-INSERT INTO mahasiswa (id,nim,nama,jurusan,tanggalLahir)
-VALUES (1, 233040001, 'Nick Kuipers', 'Teknik Informatika', '2003-04-03'),
-(2, 233040002, 'Budi Arianto', 'Teknik Informatika', '2002-05-12'),
-(3, 233040003, 'Jamaludin', 'Teknik Informatika', '2001-10-05'),
-(4, 233040004, 'Tom Holland', 'Teknik Informatika', '2000-01-12'),
-(5, 233040005, 'Aufa Ramdhan', 'Teknik Informatika', '2005-04-07'),
-(6, 233040006, 'Robert ', 'Teknik Informatika', '2003-11-05');
-
-SELECT mahasiswa.*
-FROM mahasiswa
-
-
-
+CREATE TABLE HR.Employees
+(
+  empid           INT          NOT NULL IDENTITY,
+  lastname        NVARCHAR(20) NOT NULL,
+  firstname       NVARCHAR(10) NOT NULL,
+  title           NVARCHAR(30) NOT NULL,
+  titleofcourtesy NVARCHAR(25) NOT NULL,
+  birthdate       DATETIME     NOT NULL,
+  hiredate        DATETIME     NOT NULL,
+  address         NVARCHAR(60) NOT NULL,
+  city            NVARCHAR(15) NOT NULL,
+  region          NVARCHAR(15) NULL,
+  postalcode      NVARCHAR(10) NULL,
+  country         NVARCHAR(15) NOT NULL,
+  phone           NVARCHAR(24) NOT NULL,
+  mgrid           INT          NULL,
+  CONSTRAINT PK_Employees PRIMARY KEY(empid),
+  CONSTRAINT FK_Employees_Employees FOREIGN KEY(mgrid)
+    REFERENCES HR.Employees(empid),
+  CONSTRAINT CHK_birthdate CHECK(birthdate <= CURRENT_TIMESTAMP)
+);
